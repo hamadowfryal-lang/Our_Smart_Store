@@ -1,0 +1,71 @@
+id,name,price,category
+1,iPhone 15 Pro,999,Smartphones
+2,Samsung Galaxy S24,899,Smartphones
+3,Google Pixel 8,699,Smartphones
+4,MacBook Air M2,1100,Electronics
+5,Dell XPS 13,1250,Electronics
+6,HP Spectre x360,1350,Electronics
+7,Sony WH-1000XM5,350,Accessories
+8,AirPods Pro 2,249,Accessories
+9,Mechanical Keyboard,120,Accessories
+10,Logitech MX Master 3,99,Accessories
+11,Summer T-Shirt,25,Clothing
+12,Denim Jacket,75,Clothing
+13,Leather Backpack,45,Clothing
+14,Nike Running Shoes,85,Sports
+15,Adidas Sneakers,90,Sports
+16,Nespresso Machine,120,Home Appliances
+17,Air Fryer XXL,180,Home Appliances
+18,Smart Watch V2,250,Accessories
+19,Gaming Mouse,65,Accessories
+20,Yoga Mat,30,Sports
+21,Dumbbell Set,55,Sports
+22,Espresso Machine,450,Home Appliances
+23,Cotton Hoodie,40,Clothing
+24,Winter Coat,150,Clothing
+25,Casual Shoes,60,Clothing
+26,Wireless Earbuds,130,Accessories
+27,Smart Light Bulb,20,Electronics
+28,External Hard Drive,80,Electronics
+29,Monitor 27 inch,300,Electronics
+30,Gaming Chair,200,Accessories
+31,Blender Pro,90,Home Appliances
+32,Electric Kettle,35,Home Appliances
+33,Toaster,45,Home Appliances
+34,Microwave Oven,110,Home Appliances
+35,Vacuum Cleaner,220,Home Appliances
+36,Formal Shirt,35,Clothing
+37,Chino Pants,45,Clothing
+38,Silk Scarf,20,Clothing
+39,Sports Watch,180,Sports
+40,Tennis Racket,140,Sports
+41,Swimming Goggles,15,Sports
+42,Sleeping Bag,70,Sports
+43,Camping Tent,120,Sports
+44,Kindle E-Reader,130,Books
+45,Programming Book,50,Books
+46,History Novel,18,Books
+47,Cookbook Deluxe,25,Books
+48,Bluetooth Speaker,80,Electronics
+49,Webcam 4K,95,Electronics
+50,Laptop Stand,40,Accessories
+51,Desk Lamp,30,Home Appliances
+52,Office Table,250,Home Appliances
+53,Power Bank 20000mAh,50,Electronics
+54,USB-C Hub,35,Electronics
+55,Electric Scooter,450,Electronics
+56,Drone with Camera,600,Electronics
+57,Mirrorless Camera,1500,Electronics
+58,Camera Lens 50mm,200,Electronics
+59,Tripod Stand,55,Electronics
+60,Video Game Console,500,Electronics
+61,VR Headset,400,Electronics
+62,Smart Thermostat,150,Home Appliances
+63,Security Camera,90,Home Appliances
+64,Robot Vacuum,350,Home Appliances
+65,Leather Belt,30,Clothing
+66,Sunglasses,110,Clothing
+67,Wrist Watch Silver,300,Accessories
+68,Running Shorts,25,Sports
+69,Gym Bag,35,Sports
+70,Basketball,25,Sports
