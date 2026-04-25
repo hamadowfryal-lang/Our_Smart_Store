@@ -12,11 +12,16 @@ if (isset($_GET['act']) && isset($_GET['id'])) {
     header("Location: all_products.php"); exit();
 }
 
-if (isset($_POST['rate'])) {
-    $h = fopen("ratings.csv", "a");
-    fputcsv($h, [$_POST['p_id'], $_POST['stars'], time(), $u_id]);
+$userInterests = [];
+if (file_exists("behavior.csv")) {
+    $h = fopen("behavior.csv", "r");
+    while (($data = fgetcsv($h)) !== FALSE) {
+        if (isset($data[3]) && $data[3] == $u_id) { 
+
+            $userInterests[] = $data[0]; 
+        }
+    }
     fclose($h);
-    header("Location: all_products.php"); exit();
 }
 
 $cats = [];
