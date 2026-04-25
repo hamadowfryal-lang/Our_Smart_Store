@@ -7,6 +7,7 @@ function fetchInventory() {
         $fileHandle = fopen($filePath, "r");
         fgetcsv($fileHandle); 
         while ($row = fgetcsv($fileHandle)) {
+            if (empty($row[0])) continue; 
             $inventory[] = [
                 'id'    => $row[0],
                 'name'  => $row[1],
@@ -39,64 +40,60 @@ function manageUserSession($firstName, $lastName, $age, $location, $gender) {
     return $newId;
 }
 
-
-function nqat($productId, $u_id = null) { 
+function nqat($productId, $u_id) { 
     $totalScore = 0;
+    
     if (file_exists("behavior.csv")) {
-        foreach (file("behavior.csv") as $entry) {
-            $data = explode(",", trim($entry));
+        $h = fopen("behavior.csv", "r");
+        while (($data = fgetcsv($h)) !== FALSE) {
             if (isset($data[3]) && $data[3] == $u_id && $data[0] == $productId) {
                 if ($data[1] == 'purchased') $totalScore += 100;
                 if ($data[1] == 'cart')      $totalScore += 50;  
                 if ($data[1] == 'click')     $totalScore += 10; 
             }
         }
+        fclose($h);
     }
+    
     if (file_exists("ratings.csv")) {
-        foreach (file("ratings.csv") as $entry) {
-            $data = explode(",", trim($entry));
+        $h = fopen("ratings.csv", "r");
+        while (($data = fgetcsv($h)) !== FALSE) {
             if (isset($data[3]) && $data[3] == $u_id && $data[0] == $productId) {
                 $totalScore += ((int)$data[1] * 20);
             }
         }
+        fclose($h);
     }
     return $totalScore;
 }
 
-
-function calculateSetFitness($recommendationSet) {
+function calculateSetFitness($recommendationSet, $u_id) {
     $score = 0;
     foreach ($recommendationSet as $item) {
-        $score += nqat($item['id']);
+        $score += nqat($item['id'], $u_id);
     }
     return $score;
 }
 
-function generateInitialPopulation($inventory, $popSize = 6) {
-    $pop = [];
-    for ($i = 0; $i < $popSize; $i++) {
-        shuffle($inventory);
-        $pop[] = array_slice($inventory, 0, 7);
-    }
-    return $pop;
-}
-
-function crossoverParents($parentOne, $parentTwo) {
-    return array_merge(array_slice($parentOne, 0, 3), array_slice($parentTwo, 3, 4));
-}
-
-function getGeneticRecommendations($inventory) {
+function getGeneticRecommendations($inventory, $u_id) {
     if (empty($inventory)) return [];
-    $currentPopulation = generateInitialPopulation($inventory);
+    
+    $currentPopulation = [];
+    for ($i = 0; $i < 6; $i++) {
+        shuffle($inventory);
+        $currentPopulation[] = array_slice($inventory, 0, 7);
+    }
 
     for ($generation = 0; $generation < 5; $generation++) {
-        usort($currentPopulation, function($a, $b) {
-            return calculateSetFitness($b) - calculateSetFitness($a);
+        usort($currentPopulation, function($a, $b) use ($u_id) {
+            return calculateSetFitness($b, $u_id) - calculateSetFitness($a, $u_id);
         });
+
         $bestSolutions = array_slice($currentPopulation, 0, 2);
         $nextGeneration = $bestSolutions;
+        
         while (count($nextGeneration) < 6) {
-            $child = crossoverParents($bestSolutions[0], $bestSolutions[1]);
+            $child = array_merge(array_slice($bestSolutions[0], 0, 3), array_slice($bestSolutions[1], 3, 4));
             if (rand(0, 100) < 15) {
                 $child[rand(0, 6)] = $inventory[array_rand($inventory)];
             }
@@ -104,16 +101,18 @@ function getGeneticRecommendations($inventory) {
         }
         $currentPopulation = $nextGeneration;
     }
-    usort($currentPopulation, function($a, $b) {
-        return calculateSetFitness($b) - calculateSetFitness($a);
+
+    usort($currentPopulation, function($a, $b) use ($u_id) {
+        return calculateSetFitness($b, $u_id) - calculateSetFitness($a, $u_id);
     });
+
     return array_column($currentPopulation[0], 'id');
 }
 
 $products = fetchInventory(); 
 
-function afdal_she($all_products) {
-    return getGeneticRecommendations($all_products);
+function afdal_she($all_products, $u_id) {
+    return getGeneticRecommendations($all_products, $u_id);
 }
 
 function login_or_reg($fn, $ln, $age, $city, $gen) {
