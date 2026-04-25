@@ -40,12 +40,12 @@ function manageUserSession($firstName, $lastName, $age, $location, $gender) {
 }
 
 
-function nqat($productId) { 
+function nqat($productId, $u_id = null) { 
     $totalScore = 0;
     if (file_exists("behavior.csv")) {
         foreach (file("behavior.csv") as $entry) {
             $data = explode(",", trim($entry));
-            if ($data[0] == $productId) {
+            if (isset($data[3]) && $data[3] == $u_id && $data[0] == $productId) {
                 if ($data[1] == 'purchased') $totalScore += 100;
                 if ($data[1] == 'cart')      $totalScore += 50;  
                 if ($data[1] == 'click')     $totalScore += 10; 
@@ -55,7 +55,7 @@ function nqat($productId) {
     if (file_exists("ratings.csv")) {
         foreach (file("ratings.csv") as $entry) {
             $data = explode(",", trim($entry));
-            if ($data[0] == $productId) {
+            if (isset($data[3]) && $data[3] == $u_id && $data[0] == $productId) {
                 $totalScore += ((int)$data[1] * 20);
             }
         }
