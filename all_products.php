@@ -7,7 +7,7 @@ $u_id = $_SESSION['user_id'];
 
 if (isset($_GET['act']) && isset($_GET['id'])) {
     $h = fopen("behavior.csv", "a");
-    fputcsv($h, [$_GET['id'], $_GET['act'], time(), $u_id]);
+    fputcsv($h, [$_GET['id'], $_GET['act'], time(), $u_id]); 
     fclose($h);
     header("Location: all_products.php"); exit();
 }
