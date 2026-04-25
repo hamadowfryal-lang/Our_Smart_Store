@@ -1,7 +1,9 @@
-user_id,age,location,gender,first_name,last_name101,23,سوريا,Female,فريال,حمدو
+user_id,age,location,gender,first_name,last_name
 101,23,سوريا,Female,فريال,حمدو
-102,17,اللاذفية,Male,علي,حسن
-103,9,اللاذقية,Male,احمد,حمدو
-104,36,D,Male,Diaa,Abd
-105,3,r,Female,f,f
-106,23,دمشق,Female,خولة,معمر
+104,17,اللاذفية,Male,علي,حسن
+105,9,اللاذقية,Male,احمد,حمدو
+106,36,D,Male,Diaa,Abd
+107,3,r,Female,f,f
+108,23,دمشق,Female,خولة,معمر
+109,24,دمشق,Female,علا,محمد
+110,24,دمشق,Male,ضياء,عبدالهادي
