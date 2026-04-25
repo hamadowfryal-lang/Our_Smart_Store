@@ -42,26 +42,32 @@ session_start();
     <h1> اختياراتنا </h1>
     <p class="subtitle">لقد قمنا بتقديم أفضل 7 منتجات في المتجر لحضرتكم</p>
 
-    <div class="grid">
-        <?php 
-        $best = afdal_she($products);
-        $delay = 0;
-        foreach($best as $id) {
-            foreach($products as $p) {
-                if($p['id'] == $id) {
-                    echo "<div class='pick-card' style='animation-delay: {$delay}s'>
-                            <div class='item-cat'>{$p['cat']}</div>
-                            <div class='item-name'>{$p['name']}</div>
-                            <div class='item-price'>{$p['price']}$</div>
-                            
-                            <a href='all_products.php?act=cart&id={$id}' style='background:var(--orange); color:white;' class='btn'> للسلة</a>
-                            <a href='all_products.php?act=buy&id={$id}' style='background:var(--main); color:white;' class='btn'> شراء الآن</a>
-                          </div>";
-                    $delay += 0.1;
-                }
+<div class="grid">
+    <?php 
+    $best = afdal_she($products, $_SESSION['user_id']); 
+    
+    if (empty($best)) {
+        $best = array_column(array_slice($products, 0, 7), 'id');
+    }
+
+    $delay = 0;
+    foreach($best as $id) {
+        foreach($products as $p) {
+            if($p['id'] == $id) {
+                echo "<div class='pick-card' style='animation-delay: {$delay}s'>
+                        <div class='item-cat'>{$p['cat']}</div>
+                        <div class='item-name'>{$p['name']}</div>
+                        <div class='item-price'>{$p['price']}$</div>
+                        
+                        <a href='all_products.php?act=cart&id={$id}' style='background:var(--orange); color:white;' class='btn'> للسلة</a>
+                        <a href='all_products.php?act=buy&id={$id}' style='background:var(--main); color:white;' class='btn'> شراء الآن</a>
+                      </div>";
+                $delay += 0.1;
+                break; 
             }
         }
-        ?>
+    }
+    ?>
     </div>
     <br><br>
     <a href="all_products.php" style="color:var(--main); font-weight:bold; text-decoration:none; border-bottom: 2px solid;">← العودة للمتجر</a>
