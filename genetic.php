@@ -47,9 +47,9 @@ function nqat($productId, $u_id) {
         $h = fopen("behavior.csv", "r");
         while (($data = fgetcsv($h)) !== FALSE) {
             if (isset($data[3]) && $data[3] == $u_id && $data[0] == $productId) {
-                if ($data[1] == 'purchased') $totalScore += 100;
-                if ($data[1] == 'cart')      $totalScore += 50;  
-                if ($data[1] == 'click')     $totalScore += 10; 
+                if ($data[1] == 'purchased') $totalScore += 5;
+                if ($data[1] == 'click')     $totalScore += 2;
+                if ($data[1] == 'cart')      $totalScore += 1;  
             }
         }
         fclose($h);
