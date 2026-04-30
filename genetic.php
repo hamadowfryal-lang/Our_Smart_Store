@@ -22,13 +22,15 @@ function fetchInventory() {
 
 function manageUserSession($firstName, $lastName, $age, $location, $gender) {
     $filePath = "users.csv";
-    if (!file_exists($filePath)) {
+    if (!file_exists($filePath)) 
+    {
         $fileHandle = fopen($filePath, "w");
         fputcsv($fileHandle, ['user_id', 'age', 'location', 'gender', 'first_name', 'last_name']);
         fclose($fileHandle);
     }
     $existingUsers = array_map('str_getcsv', file($filePath));
-    foreach ($existingUsers as $user) {
+    foreach ($existingUsers as $user) 
+    {
         if (isset($user[4]) && $user[4] == $firstName && $user[5] == $lastName) {
             return $user[0];
         }
